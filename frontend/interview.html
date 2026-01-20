@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interview in Progress - AI Interview Platform</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#2dd4bf"
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white min-h-screen">
+
+  <div class="min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="border-b border-slate-700 bg-slate-900/50 backdrop-blur-sm">
+      <div class="max-w-7xl mx-auto px-12 py-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h1 class="text-2xl font-bold bg-gradient-to-r from-teal-400 to-cyan-400 bg-clip-text text-transparent">
+              AI Interview Platform
+            </h1>
+            <p class="text-primary font-semibold text-sm uppercase tracking-wide mt-1" id="roundName">
+              Loading...
+            </p>
+          </div>
+          <div class="flex items-center gap-8">
+            <div>
+              <p class="text-sm text-gray-400 mb-1">Progress</p>
+              <div class="w-48 bg-slate-700 rounded-full h-2 overflow-hidden">
+                <div id="questionProgress" class="bg-primary h-full transition-all duration-500" style="width: 0%">
+                </div>
+              </div>
+            </div>
+            <div class="text-right">
+              <p class="text-sm text-gray-400 mb-1">Time Remaining</p>
+              <div class="text-3xl font-mono font-bold text-primary">
+                <span id="timer">15:00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex items-center justify-center p-12">
+      <div class="w-full max-w-5xl">
+
+        <!-- Question Card -->
+        <div class="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-2xl p-12 shadow-2xl mb-6">
+          <div class="flex items-center justify-between mb-6">
+            <p class="text-sm text-gray-400 uppercase tracking-wide">
+              Question <span id="questionIndex">1</span> of <span id="totalQuestions">--</span>
+            </p>
+          </div>
+
+          <h2 id="questionText" class="text-3xl font-semibold leading-relaxed text-gray-100 mb-8">
+            Loading question...
+          </h2>
+
+          <!-- Answer Input -->
+          <textarea id="answer" placeholder="Type your answer here..." class="w-full bg-slate-900/50 border border-slate-600 rounded-xl p-6 min-h-[200px] text-lg
+                   focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20
+                   transition-all resize-none"></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <button id="submitBtn" class="w-full bg-gradient-to-r from-teal-500 to-cyan-500 text-black text-xl font-bold py-6 rounded-xl
+                 hover:from-teal-400 hover:to-cyan-400 transition-all duration-200
+                 shadow-lg hover:shadow-teal-500/50 transform hover:scale-[1.01]
+                 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none">
+          Submit Answer →
+        </button>
+
+      </div>
+    </main>
+
+  </div>
+
+  <script src="./js/interview.js"></script>
+</body>
+
+</html>

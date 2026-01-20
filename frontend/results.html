@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interview Results - AI Interview Platform</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#2dd4bf"
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Heatmap Styles */
+    .heatmap-block {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .heatmap-block:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .heatmap-tooltip {
+      position: absolute;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(45, 212, 191, 0.3);
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      color: white;
+      pointer-events: none;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      max-width: 250px;
+    }
+  </style>
+</head>
+
+<body class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white min-h-screen">
+
+  <!-- Header -->
+  <header class="border-b border-slate-700 bg-slate-900/50 backdrop-blur-sm">
+    <div class="max-w-7xl mx-auto px-12 py-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h1 class="text-3xl font-bold bg-gradient-to-r from-teal-400 to-cyan-400 bg-clip-text text-transparent">
+            AI Interview Platform
+          </h1>
+          <p class="text-sm text-gray-400 mt-1">Professional Assessment System</p>
+        </div>
+        <div class="text-right">
+          <p class="text-sm text-gray-400">Status</p>
+          <p class="text-xl font-bold text-green-400">✓ Completed</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="min-h-screen py-12 px-12">
+    <div class="max-w-7xl mx-auto">
+
+      <!-- Page Title -->
+      <div class="text-center mb-12">
+        <h2 class="text-5xl font-bold mb-4 bg-gradient-to-r from-teal-400 to-cyan-400 bg-clip-text text-transparent">
+          Interview Results
+        </h2>
+        <p class="text-xl text-gray-400">
+          Comprehensive Performance Analysis
+        </p>
+      </div>
+
+      <!-- Overall Score Card -->
+      <div
+        class="bg-gradient-to-r from-teal-500/10 to-cyan-500/10 border border-teal-500/30 rounded-2xl p-12 mb-8 text-center">
+        <p class="text-gray-400 text-lg mb-3 uppercase tracking-wide">Overall Score</p>
+        <div class="flex items-center justify-center gap-4">
+          <p id="overallScore" class="text-8xl font-bold text-teal-400">
+            --
+          </p>
+          <span class="text-4xl text-gray-500 font-light">/ 100</span>
+        </div>
+        <div class="mt-6 w-full max-w-2xl mx-auto bg-slate-800 rounded-full h-4 overflow-hidden">
+          <div id="overallProgress"
+            class="bg-gradient-to-r from-teal-500 to-cyan-500 h-full transition-all duration-1000" style="width: 0%">
+          </div>
+        </div>
+      </div>
+
+      <!-- Answer Quality Heatmap -->
+      <div class="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-2xl p-10 mb-8">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center text-2xl">
+            📊
+          </div>
+          <h2 class="text-2xl font-bold">Answer Quality Heatmap</h2>
+        </div>
+        <p class="text-gray-400 mb-4">Hover over blocks to see question details</p>
+        <div id="heatmap" class="flex flex-wrap gap-3"></div>
+        <div class="mt-4 flex items-center gap-6 text-sm text-gray-400">
+          <div class="flex items-center gap-2">
+            <div class="w-6 h-6 bg-green-500 rounded"></div>
+            <span>Good (7-10)</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="w-6 h-6 bg-yellow-500 rounded"></div>
+            <span>Average (4-6)</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="w-6 h-6 bg-red-500 rounded"></div>
+            <span>Weak (0-3)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Round Breakdown Grid -->
+      <div class="grid grid-cols-3 gap-6 mb-8">
+
+        <!-- Technical Round -->
+        <div class="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-2xl p-8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center text-2xl">
+              💻
+            </div>
+            <h3 class="text-xl font-semibold">Technical</h3>
+          </div>
+          <p id="techScore" class="text-3xl font-bold text-blue-400 mb-4">--</p>
+          <div class="w-full bg-slate-700 rounded-full h-3 overflow-hidden">
+            <div id="techProgress" class="bg-blue-500 h-full transition-all duration-1000" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <!-- HR Round -->
+        <div class="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-2xl p-8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center text-2xl">
+              👥
+            </div>
+            <h3 class="text-xl font-semibold">HR</h3>
+          </div>
+          <p id="hrScore" class="text-3xl font-bold text-purple-400 mb-4">--</p>
+          <div class="w-full bg-slate-700 rounded-full h-3 overflow-hidden">
+            <div id="hrProgress" class="bg-purple-500 h-full transition-all duration-1000" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <!-- MCQ Round -->
+        <div class="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-2xl p-8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center text-2xl">
+              ✓
+            </div>
+            <h3 class="text-xl font-semibold">MCQ</h3>
+          </div>
+          <p id="mcqScore" class="text-3xl font-bold text-green-400 mb-4">--</p>
+          <div class="w-full bg-slate-700 rounded-full h-3 overflow-hidden">
+            <div id="mcqProgress" class="bg-green-500 h-full transition-all duration-1000" style="width: 0%"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- AI Feedback Panel -->
+      <div class="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-2xl p-10 mb-8">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-12 bg-teal-500/20 rounded-xl flex items-center justify-center text-2xl">
+            🤖
+          </div>
+          <h2 class="text-2xl font-bold">AI Performance Analysis</h2>
+        </div>
+        <p id="feedback" class="text-lg text-gray-300 leading-relaxed">
+          Loading your personalized feedback...
+        </p>
+      </div>
+
+      <!-- Actions -->
+      <div class="flex justify-center gap-4">
+        <button onclick="restart()" class="bg-gradient-to-r from-teal-500 to-cyan-500 text-black text-lg font-bold px-12 py-5 rounded-xl
+                 hover:from-teal-400 hover:to-cyan-400 transition-all duration-200
+                 shadow-lg hover:shadow-teal-500/50 transform hover:scale-[1.02]">
+          Start New Interview
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="./js/results.js"></script>
+</body>
+
+</html>

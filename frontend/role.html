@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <title>Select Role – AI Interview Bot</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#2dd4bf",
+            bgDark: "#0f172a",
+            card: "#020617"
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-bgDark text-white min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="p-6 text-center">
+    <p class="text-primary text-sm font-semibold tracking-wide">
+      Step 2 of 3
+    </p>
+    <h1 class="text-2xl font-bold mt-2">
+      Select Interview Role
+    </h1>
+    <p class="text-slate-400 mt-2">
+      Based on your resume, our AI recommends the following roles
+    </p>
+  </header>
+
+  <!-- Roles -->
+  <main class="flex-1 px-6 max-w-md mx-auto w-full">
+    <div id="roles" class="space-y-4"></div>
+  </main>
+
+  <!-- Footer Button -->
+  <footer class="p-6 max-w-md mx-auto w-full">
+    <button
+      id="confirmBtn"
+      disabled
+      class="w-full bg-primary text-black py-3 rounded-xl font-bold opacity-50 cursor-not-allowed"
+    >
+      Confirm & Start Interview →
+    </button>
+  </footer>
+
+  <script src="./js/role.js"></script>
+</body>
+</html>
